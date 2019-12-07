@@ -23,7 +23,30 @@ app.use(express.static("js"));
 let noteId = 1;
 //routes
 
+//delete
+
+app.delete("/api/notes/:id", (req, res) => {
+  const chosen = req.params.id;
+  console.log(chosen);
+  notes.forEach((note, index, notes) => {
+    route = note.id.toString();
+    if (route === chosen) {
+      notes.splice(index, 1);
+    }
+  });
+  // let data = notes.filter(note => {
+  //   let route = note.id.toString();
+  //   if (route === chosen) {
+  //     return false;
+  //   }
+  //   console.log("Delete");
+  // });
+
+  res.json(notes);
+});
+
 //get
+
 //api
 app.get("/api/notes", (req, res) => {
   return res.json(notes);
